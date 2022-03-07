@@ -1,6 +1,6 @@
 # Projeto alunos 5º Periodo Sistemas UniAlfa
 
-Para instalar o projeto execute o comando:
+Para instalar as dependências do projeto execute o comando:
 
 ### `npm install`
 
