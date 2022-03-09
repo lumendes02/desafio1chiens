@@ -3,11 +3,14 @@ import { GlobalStyle } from './styles/global'
 import { Header } from './components/Header'
 import { NovoModal } from './components/Modal'
 import Modal from 'react-modal';
+import { ListagemTarefas } from './components/ListagemTarefas';
+import { TarefaContext } from './contexts/tarefaContext';
 
 Modal.setAppElement('#root');
 function App() {
 
     const [visibleModal, setVisibleModal] = useState<boolean>(false);
+
 
     function abrirModal() {
         setVisibleModal(true)
@@ -18,17 +21,21 @@ function App() {
     }
 
     return (
-        <div>
-            <GlobalStyle />
+        <TarefaContext.Provider value={[]}>
+            <div>
+                <GlobalStyle />
 
-            <Header abrirModal={abrirModal} />
+                <Header abrirModal={abrirModal} />
 
-            <NovoModal
-                visibleNovoModal={visibleModal}
-                fecharModal={fecharModal}
-            />
+                <ListagemTarefas />
 
-        </div>
+                <NovoModal
+                    visibleNovoModal={visibleModal}
+                    fecharModal={fecharModal}
+                />
+
+            </div>
+        </TarefaContext.Provider>
     );
 }
 

@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 import { FaWindowClose } from 'react-icons/fa';
 import { FormContainer } from './styles';
+import axios from 'axios';
 
 interface NovoModalProps {
     visibleNovoModal: boolean;
@@ -16,6 +17,18 @@ export function NovoModal(props: NovoModalProps) {
     function onSubmitModal(event: FormEvent) {
         //não deixa com que o formulario de reload na pagina
         event.preventDefault();
+
+        axios.post('/api/tarefas', 
+        {
+            titulo,
+            descricao
+        }).then((res) => {
+
+        })
+
+        setTitulo('')
+        setDescricao('')
+        props.fecharModal();
     }
 
     return (
