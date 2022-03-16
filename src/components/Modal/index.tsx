@@ -1,8 +1,9 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import Modal from 'react-modal';
 import { FaWindowClose } from 'react-icons/fa';
 import { FormContainer } from './styles';
 import axios from 'axios';
+import { TarefaContext } from '../../contexts/tarefaContext';
 
 interface NovoModalProps {
     visibleNovoModal: boolean;
@@ -11,6 +12,8 @@ interface NovoModalProps {
 
 export function NovoModal(props: NovoModalProps) {
 
+    const { criarTarefas } = useContext(TarefaContext);
+
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
 
@@ -18,12 +21,9 @@ export function NovoModal(props: NovoModalProps) {
         //não deixa com que o formulario de reload na pagina
         event.preventDefault();
 
-        axios.post('/api/tarefas', 
-        {
+        criarTarefas({
             titulo,
             descricao
-        }).then((res) => {
-
         })
 
         setTitulo('')

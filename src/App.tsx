@@ -4,7 +4,7 @@ import { Header } from './components/Header'
 import { NovoModal } from './components/Modal'
 import Modal from 'react-modal';
 import { ListagemTarefas } from './components/ListagemTarefas';
-import { TarefaContext } from './contexts/tarefaContext';
+import { TarefaContext, TarefasProvider } from './contexts/tarefaContext';
 
 Modal.setAppElement('#root');
 function App() {
@@ -21,7 +21,7 @@ function App() {
     }
 
     return (
-        <TarefaContext.Provider value={[]}>
+        <TarefasProvider>
             <div>
                 <GlobalStyle />
 
@@ -35,7 +35,7 @@ function App() {
                 />
 
             </div>
-        </TarefaContext.Provider>
+        </TarefasProvider>
     );
 }
 
