@@ -27,7 +27,7 @@ function App() {
 
                 <Header abrirModal={abrirModal} />
 
-                <ListagemTarefas />
+                <ListagemTarefas abrirModal={abrirModal} />
 
                 <NovoModal
                     visibleNovoModal={visibleModal}

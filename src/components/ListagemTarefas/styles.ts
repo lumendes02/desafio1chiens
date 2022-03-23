@@ -33,7 +33,24 @@ export const Container = styled.div`
             display: flex;
             justify-content: space-between;
 
-            
+            div {
+                    display: flex;
+                    justify-content: center;
+                button {
+                    font-size: 1rem;
+
+                    background: transparent;
+                    border: 0;
+
+                    color: #ccc;
+
+                    transition: 0.2s;
+
+                    &:hover {
+                        filter: brightness(0);
+                    }
+                }
+            }
         }
     }
 `;

@@ -1,9 +1,18 @@
 import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
+interface InterfaceEditarTarefa {
+    editar: boolean;
+    tarefa: InterfaceTarefas | null;
+}
+
 interface interfaceTarefaContext {
     tarefas: Array<InterfaceTarefas>;
     criarTarefas: (data: PropsTarefasInput) => Promise<void>;
+    funEditarTarefa: (data: InterfaceEditarTarefa) => void;
+    editarTarefa: InterfaceEditarTarefa;
+    valoresPadraoEditarTarefa: () => void;
+    atualizarTarefa: (data: InterfaceTarefas) => Promise<void>;
 }
 export const TarefaContext = createContext({} as interfaceTarefaContext);
 
@@ -28,6 +37,9 @@ interface PropsTarefasProvider {
 export function TarefasProvider(props: PropsTarefasProvider) {
 
     const [tarefas, setTarefas] = useState<Array<InterfaceTarefas>>([]);
+    const [editarTarefa, setEditarTarefa] = useState<InterfaceEditarTarefa>({
+        editar: false, tarefa: null
+    });
 
     useEffect(() => {
 
@@ -50,8 +62,38 @@ export function TarefasProvider(props: PropsTarefasProvider) {
         })
     }
 
+    async function atualizarTarefa(data: InterfaceTarefas) {
+        await axios.put('/api/tarefas', data)
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+
+        await axios.get('/api/tarefas').then((resposta) => {
+
+            setTarefas(resposta.data)
+
+        })
+    }
+
+    function valoresPadraoEditarTarefa() {
+        setEditarTarefa({ editar: false, tarefa: null })
+    }
+
+    function funEditarTarefa(data: InterfaceEditarTarefa) {
+        // console.log('funEditarTarefa')
+        // console.log(data)
+        setEditarTarefa(data)
+    }
+
     return (
-        <TarefaContext.Provider value={{ tarefas, criarTarefas }}>
+        <TarefaContext.Provider value={{
+            tarefas, criarTarefas,
+            atualizarTarefa,
+            funEditarTarefa, editarTarefa, valoresPadraoEditarTarefa
+        }}>
             {props.children}
         </TarefaContext.Provider>
     )

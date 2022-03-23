@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Container } from "./styles";
 import { TarefaContext } from "../../contexts/tarefaContext";
+import { FaPen } from 'react-icons/fa'
 
 interface interfaceTarefas {
     descricao: string;
@@ -8,12 +9,14 @@ interface interfaceTarefas {
     titulo: string;
 }
 
-export function ListagemTarefas() {
-
+interface PropsListarTarefas {
+    abrirModal: () => void;
+}
+export function ListagemTarefas({ abrirModal }: PropsListarTarefas) {
 
     const tarefaCtx = useContext(TarefaContext);
 
-    const [tarefas, setTarefas] = useState<Array<interfaceTarefas>>([]);
+    // const [tarefas, setTarefas] = useState<Array<interfaceTarefas>>([]);
 
 
     return (
@@ -24,9 +27,26 @@ export function ListagemTarefas() {
                     {
                         tarefaCtx.tarefas.map((element, index) => (
                             <li key={element.id} >
-                                <div>
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}>
                                     <h4>{element.titulo}</h4>
                                     <p>{element.descricao}</p>
+                                </div>
+                                <div>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            tarefaCtx.funEditarTarefa({
+                                                editar: true,
+                                                tarefa: element
+                                            })
+                                            abrirModal();
+                                        }}
+                                    >
+                                        <FaPen />
+                                    </button>
                                 </div>
                             </li>
                         ))
