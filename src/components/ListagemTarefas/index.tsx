@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Container } from "./styles";
 import { TarefaContext } from "../../contexts/tarefaContext";
-import { FaPen } from 'react-icons/fa'
+import { FaPen, FaTrash } from 'react-icons/fa'
 
 interface interfaceTarefas {
     descricao: string;
@@ -46,6 +46,12 @@ export function ListagemTarefas({ abrirModal }: PropsListarTarefas) {
                                         }}
                                     >
                                         <FaPen />
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => tarefaCtx.excluirTarefa(element)}
+                                    >
+                                        <FaTrash />
                                     </button>
                                 </div>
                             </li>

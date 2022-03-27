@@ -44,6 +44,8 @@ export const Container = styled.div`
 
                     color: #ccc;
 
+                    padding: 6px;
+
                     transition: 0.2s;
 
                     &:hover {

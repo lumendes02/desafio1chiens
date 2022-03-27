@@ -51,11 +51,6 @@ export function NovoModal(props: NovoModalProps) {
                 descricao
             }
 
-            // atualizarTarefa({
-            //     id: editarTarefa.tarefa?.id ? editarTarefa.tarefa.id : '',
-            //     titulo: titulo,
-            //     descricao: descricao 
-            // })
             atualizarTarefa(obj)
         } else {
             criarTarefas({
