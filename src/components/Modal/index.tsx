@@ -16,9 +16,11 @@ export function NovoModal(props: NovoModalProps) {
         criarTarefas,
         editarTarefa,
         valoresPadraoEditarTarefa,
-        atualizarTarefa
+        atualizarTarefa,
+        excluirTarefa
     } = useContext(TarefaContext);
 
+    const [quadro, setQuadro] = useState("");
     const [titulo, setTitulo] = useState("");
     const [descricao, setDescricao] = useState("");
 
@@ -28,7 +30,11 @@ export function NovoModal(props: NovoModalProps) {
                 editarTarefa.tarefa.titulo : '');
 
             setDescricao(editarTarefa.tarefa?.descricao ?
-                editarTarefa.tarefa.descricao : '')
+                editarTarefa.tarefa.descricao : '');
+
+            setQuadro(editarTarefa.tarefa?.quadro ?
+                 editarTarefa.tarefa.quadro : '');
+
         }
     }, [editarTarefa.editar])
 
@@ -47,6 +53,7 @@ export function NovoModal(props: NovoModalProps) {
 
             let obj: any = {
                 ...editarTarefa.tarefa,
+                quadro,
                 titulo,
                 descricao
             }
@@ -54,12 +61,23 @@ export function NovoModal(props: NovoModalProps) {
             atualizarTarefa(obj)
         } else {
             criarTarefas({
+                quadro,
                 titulo,
                 descricao
             })
         }
 
 
+        limparCamposAoFecharModal();
+    }
+
+    function excluir() {
+        let obj: any = {
+            ...editarTarefa.tarefa,
+            titulo,
+            descricao
+        }
+        excluirTarefa(obj);
         limparCamposAoFecharModal();
     }
 
@@ -81,6 +99,14 @@ export function NovoModal(props: NovoModalProps) {
             <FormContainer onSubmit={onSubmitModal} >
                 <h2>Cadastrar Tarefa</h2>
 
+                <select value={quadro} onChange={(event) => setQuadro(event.target.value)}>
+                    <option value="">-</option>
+                    <option value="1">Quadro 1</option>
+                    <option value="2">Quadro 2</option>
+                    <option value="3">Quadro 3</option>
+                </select>
+
+
                 <input
                     placeholder='Titulo'
                     value={titulo}
@@ -98,6 +124,13 @@ export function NovoModal(props: NovoModalProps) {
                 >
                     {editarTarefa.editar ? 'Editar' : 'Cadastrar'}
                 </button>
+
+                {editarTarefa.editar && <button
+                     type="button"
+                     onClick={() => excluir()}
+                >
+                    Excluir
+                </button>}
             </FormContainer>
 
         </Modal>

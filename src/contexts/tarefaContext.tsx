@@ -20,6 +20,7 @@ export const TarefaContext = createContext({} as interfaceTarefaContext);
 
 type InterfaceTarefas = {
     id: string,
+    quadro: string,
     titulo: string,
     descricao: string
 }
@@ -101,7 +102,7 @@ export function TarefasProvider(props: PropsTarefasProvider) {
     }
 
     function funEditarTarefa(data: InterfaceEditarTarefa) {
-        setEditarTarefa(data)
+        setEditarTarefa(data);
     }
 
     return (

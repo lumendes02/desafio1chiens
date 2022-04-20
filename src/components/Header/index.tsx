@@ -1,11 +1,14 @@
-import { Container, Content } from "./styles"
+import { Container, Content } from "./styles";
+import { TarefaContext } from "../../contexts/tarefaContext";
+import { useContext, useState } from "react";
 
 interface HeaderProps {
     abrirModal: () => void;
 }
 
-export const Header = (props: HeaderProps) => {
 
+export const Header = (props: HeaderProps) => {
+    const tarefaCtx = useContext(TarefaContext);
     return (
         <Container>
             <Content>
@@ -16,7 +19,7 @@ export const Header = (props: HeaderProps) => {
                     >
                         Nova tarefa
                     </button>
-                    <h3>Total: 50</h3>
+                    <h3>Total: {tarefaCtx.tarefas.length}</h3>
                 </div>
 
                 

@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 
+export const Container2 = styled.div`
+display: flex;
+flex-wrap: wrap;
+`
+
 export const Container = styled.div`
     margin-top: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
 
-    display: flex;
     justify-content: center;
 
     ul {
         width: 30rem;
         border-radius: 0.25rem;
-        margin: 5px;
         border: 2px solid #d7d7d7;
 
         background-color: #EBECF0;
